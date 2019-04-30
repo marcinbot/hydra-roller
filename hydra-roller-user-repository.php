@@ -89,14 +89,14 @@ class Hydra_Roller_User_Repository {
 		$name = stripslashes( $_POST['hydra_name'] );
 		$user_id = md5( $name . uniqid( '', true ) );
 		if ( $this->add_user( $user_id, $name ) ) {
-			setcookie( self::COOKIE, $user_id . ':' . $name );
+			setcookie( self::COOKIE, $user_id . ':' . $name, 0, '/' );
 			$query_args = array();
 		} else {
 			$query_args = array( 'hydra_error' => '1' );
 		}
 
 		global $wp;
-		$current_url = home_url( add_query_arg( $query_args, $wp->request ) );
+		$current_url = home_url( add_query_arg( $query_args, trailingslashit( $wp->request ) ) );
 		wp_redirect( $current_url );
 	}
 
