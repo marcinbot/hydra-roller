@@ -1,6 +1,7 @@
 jQuery( document ).ready( () => {
 	const $ = jQuery;
-	const ajaxUrl = hydra_data.ajax_url;
+	const actionUrl = hydra_data.action_url;
+	const historyUrl = hydra_data.history_url;
 	const userId = hydra_data.user_id;
 	const $results = $( '#hydra-results' );
 	const $btn = $( '#hydra-roll' );
@@ -97,7 +98,7 @@ jQuery( document ).ready( () => {
 
 	const postAction = ( actionType ) => $.ajax( {
 		type: 'POST',
-		url: ajaxUrl,
+		url: actionUrl,
 		dataType: 'json',
 		contentType: 'application/json',
 		data: JSON.stringify( {
@@ -113,7 +114,12 @@ jQuery( document ).ready( () => {
 			return;
 		}
 		const expectedRender = lastRender;
-		$.getJSON( ajaxUrl )
+		$.ajax( {
+			type: 'POST',
+			url: historyUrl,
+			dataType: 'json',
+			contentType: 'application/json',
+		} )
 			.then( ( response ) => {
 				expectedRender === lastRender && processResponse( response )
 				setTimeout( poll, 1000 );
@@ -133,6 +139,9 @@ jQuery( document ).ready( () => {
 	};
 
 	$btn.click( () => {
+		if ( acting ) {
+			return;
+		}
 		disableButtons();
 		acting = true;
 		postAction( 'roll' )
@@ -147,6 +156,9 @@ jQuery( document ).ready( () => {
 	} );
 
 	$flipBtn.click( () => {
+		if ( acting ) {
+			return;
+		}
 		disableButtons();
 		acting = true;
 		postAction( 'flip' )
@@ -161,6 +173,9 @@ jQuery( document ).ready( () => {
 	} );
 
 	$fixBtn.click( () => {
+		if ( acting ) {
+			return;
+		}
 		disableButtons();
 		acting = true;
 		postAction( 'fix' )

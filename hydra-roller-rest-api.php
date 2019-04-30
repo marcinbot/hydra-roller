@@ -18,8 +18,8 @@ class Hydra_Roller_REST_API {
 	}
 
 	public function rest_api_init() {
-		register_rest_route( 'hydra_roller/v1', '/roll', array(
-			'methods' => 'GET',
+		register_rest_route( 'hydra_roller/v1', '/roll_history', array(
+			'methods' => 'POST',
 			'callback' => array( $this, 'get_roll_history' ),
 		) );
 

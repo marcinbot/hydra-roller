@@ -5,7 +5,7 @@
  * Description: Roll a d20
  * License: GPL2
  * Author: mb
- * Version: 0.5
+ * Version: 0.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

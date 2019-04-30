@@ -46,7 +46,8 @@ class Hydra_Roller_Shortcode {
 		$plugin_data = get_plugin_data( dirname( __FILE__ ) . '/hydra-roller.php', false, false );
 		wp_register_script( 'hydra_roller_js', plugins_url( 'hydra-roller.js', __FILE__ ), array( 'jquery' ), $plugin_data['Version'] );
 		wp_localize_script( 'hydra_roller_js', 'hydra_data', array(
-			'ajax_url' => get_rest_url() . 'hydra_roller/v1/roll',
+			'action_url' => get_rest_url() . 'hydra_roller/v1/roll',
+			'history_url' => get_rest_url() . 'hydra_roller/v1/roll_history',
 			'user_id' => $user_id,
 		) );
 		wp_enqueue_script( 'hydra_roller_js' );
