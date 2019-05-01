@@ -40,10 +40,10 @@ class Hydra_Roller_REST_API {
 	}
 
 	public function perform_roll_action( $request ) {
-		if ( empty( $request['actionType'] ) || empty( $request['userId'] ) ) {
+		if ( empty( $request['actionType'] ) ) {
 			return new WP_Error( 'hydra_rest_error', 'no', array( 'status' => 400 ) );
 		}
-		$this->roll_repository->maybe_perform_action( $request['userId'], $request['actionType'] );
+		$this->roll_repository->maybe_perform_action( $request['actionType'] );
 		return $this->get_roll_history();
 	}
 }

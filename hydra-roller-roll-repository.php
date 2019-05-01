@@ -60,13 +60,13 @@ class Hydra_Roller_Roll_Repository {
 		return $wpdb->query("TRUNCATE TABLE $table_name");
 	}
 
-	public function maybe_perform_action( $user_id, $action_type ) {
+	public function maybe_perform_action( $action_type ) {
+		$user = $this->user_repository->get_user();
 		$action = $this->is_valid_action( $action_type );
-		if ( ! empty( $user_id ) && $action ) {
-			$user = $this->user_repository->get_user_by_id( $user_id );
+		if ( ! empty( $user ) && $action ) {
 			if ( $this->check_can_act( $user, $action ) ) {
 				$result = self::ACTION_ROLL === $action
-					? $this->generate_pseudo_random( $user_id )
+					? $this->generate_pseudo_random( $user['id'] )
 					: null;
 				$this->add_action( $user['name'], $action, time(), $result );
 			}

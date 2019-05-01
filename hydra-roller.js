@@ -2,7 +2,6 @@ jQuery( document ).ready( () => {
 	const $ = jQuery;
 	const actionUrl = hydra_data.action_url;
 	const historyUrl = hydra_data.history_url;
-	const userId = hydra_data.user_id;
 	const $results = $( '#hydra-results' );
 	const $btn = $( '#hydra-roll' );
 	const $leader = $( '#hydra-leader' );
@@ -103,7 +102,6 @@ jQuery( document ).ready( () => {
 		contentType: 'application/json',
 		data: JSON.stringify( {
 			action: 'hydra_roller_ajax',
-			userId,
 			actionType,
 		} ),
 	} );
