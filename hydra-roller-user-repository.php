@@ -9,7 +9,7 @@ if ( class_exists( 'Hydra_Roller_User_Repository' ) ) {
 }
 
 class Hydra_Roller_User_Repository {
-	const COOKIE = 'hydra_user';
+	const COOKIE = 'hydra_user_2';
 
 	public function __construct() {
 		add_action( 'wp', array( $this, 'process_user' ) );
@@ -19,7 +19,6 @@ class Hydra_Roller_User_Repository {
 		global $wpdb;
 		$charset_collate = $wpdb->get_charset_collate();
 		$table_name = self::get_table_name();
-		$uid_index = $wpdb->prefix . 'hydra_roll_user_id_index';
 		$name_index = $wpdb->prefix . 'hydra_roll_name_index';
 
 		$sql = "CREATE TABLE $table_name (
