@@ -88,7 +88,7 @@ class Hydra_Roller_User_Repository {
 		$name = stripslashes( $_POST['hydra_name'] );
 		$user_id = md5( $name . uniqid( '', true ) );
 		if ( $this->add_user( $user_id, $name ) ) {
-			setcookie( self::COOKIE, $user_id . ':' . $name, 0, '/' );
+			setcookie( self::COOKIE, $user_id . ':' . $name, time() + 10 * YEAR_IN_SECONDS, '/' );
 			$query_args = array();
 		} else {
 			$query_args = array( 'hydra_error' => '1' );
